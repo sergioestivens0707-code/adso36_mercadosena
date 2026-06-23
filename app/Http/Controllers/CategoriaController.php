@@ -11,7 +11,9 @@ class categoriacontroller
      */
     public function index()
     {
-        //
+        $datos = Categoria::all();
+        //dd($datos);
+        return view('categoria.index', compact('datos'));
     }
 
     /**
@@ -19,7 +21,7 @@ class categoriacontroller
      */
     public function create()
     {
-        //
+        return view('categoria.new');
     }
 
     /**
