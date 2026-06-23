@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-    @extends('layouts')
-    @section('title'saludo)
+
+    @extends('layout')
+    @section('title','inicio')
     @section('content')
-        <h3>bienvenido ala aplicaion de mercadosena</h3> 
+        <h3>bienvenido a la aplicación de mercadosena</h3> 
     @stop()
-</html>

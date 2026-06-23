@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
-class categoriacontroller
+use Illuminate\Http\Request;
+use App\Models\categorias;
+use Illuminate\Support\Facades\Validator;
+
+class CategoriaController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $datos = Categoria::all();
+        $datos = categorias::all();
         //dd($datos);
         return view('categoria.index', compact('datos'));
     }
@@ -21,7 +24,7 @@ class categoriacontroller
      */
     public function create()
     {
-        return view('categoria.new');
+        return view('categorias.new');
     }
 
     /**
@@ -29,7 +32,24 @@ class categoriacontroller
      */
     public function store(Request $request)
     {
-        //
+    //dd($request);
+    $validator = Validator::make($request->all(), [
+        'nombre' => 'required|max:50',
+        'descripcion' => 'required|max:150',
+    ]);
+
+    if ($validator->fails()) {
+        return back()
+            ->withErrors($validator)
+            ->withInput();
+    }
+    else {
+
+        categorias::create($request->all());
+
+        return redirect('categorias')->with('type', 'success')
+            ->with('message', 'Registro creado exitosamente');
+    }
     }
 
     /**
@@ -44,8 +64,9 @@ class categoriacontroller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    { 
+        $datos = Categoria::find($id);
+        return view('categorias.edit', compact('datos'));
     }
 
     /**

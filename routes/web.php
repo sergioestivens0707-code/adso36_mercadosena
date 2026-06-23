@@ -6,4 +6,4 @@ use App\Http\Controllers\CategoriaController;
 Route::get('/', function () {
     return view('index');
 });
-Route::resource('Categorias', CategoriaController::class);
+Route::resource('categorias', CategoriaController::class);
