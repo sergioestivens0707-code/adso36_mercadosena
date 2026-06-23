@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use Illuminate\Http\Request;
-use App\Models\Categoria;
+use Illuminate\Database\Eloquent\Model; 
 
 class Categoria extends Model
 {
-
-    public $fillable = [
-        'nombre', 
-        'descripcion', 
-        ];
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+    ];
 }

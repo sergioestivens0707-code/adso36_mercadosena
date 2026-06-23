@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Models\categorias;
+use App\Models\Categoria;
 use Illuminate\Support\Facades\Validator;
 
 class CategoriaController
@@ -14,9 +14,9 @@ class CategoriaController
      */
     public function index()
     {
-        $datos = categorias::all();
+        $datos = Categoria::all();
         //dd($datos);
-        return view('categoria.index', compact('datos'));
+        return view('categorias.index', compact('datos'));
     }
 
     /**
@@ -45,7 +45,7 @@ class CategoriaController
     }
     else {
 
-        categorias::create($request->all());
+        Categoria::create($request->all());
 
         return redirect('categorias')->with('type', 'success')
             ->with('message', 'Registro creado exitosamente');
