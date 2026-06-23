@@ -72,9 +72,25 @@ class CategoriaController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Categoria $categoria)
     {
-        //
+        // dd($request);
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|max:50',
+            'descripcion' => 'required|max:150'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)
+                        ->withInput();
+        }
+        else {
+            $categoria->update($request->all());
+            // Categoria::create($request->all());
+
+            return redirect('categorias')->with('type', 'warning')
+                                        ->with('message', 'Registro actualizado exitosamente');
+        }
     }
 
     /**
@@ -82,6 +98,8 @@ class CategoriaController
      */
     public function destroy(string $id)
     {
-        //
+        Categoria::destroy($id);
+        return redirect('categorias')->with('type', 'danger')
+                                    ->with('message', 'El registro se eliminó');
     }
 }
